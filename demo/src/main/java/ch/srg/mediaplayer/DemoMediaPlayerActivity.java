@@ -30,6 +30,9 @@ import ch.srg.mediaplayer.demo.R;
 import ch.srg.mediaplayer.extras.dataproviders.MultiDataProvider;
 import ch.srg.mediaplayer.extras.fullscreen.helper.SystemUiHelper;
 import ch.srg.mediaplayer.extras.overlay.error.SimpleErrorMessage;
+import ch.srg.mediaplayer.internal.PlayerDelegateFactory;
+import ch.srg.mediaplayer.internal.exoplayer.ExoPlayerDelegate;
+import ch.srg.mediaplayer.internal.nativeplayer.NativePlayerDelegate;
 import ch.srg.segmentoverlay.controller.SegmentController;
 import ch.srg.segmentoverlay.model.Segment;
 import ch.srg.segmentoverlay.view.PlayerControlView;
@@ -125,6 +128,20 @@ public class DemoMediaPlayerActivity extends AppCompatActivity implements
         if (mediaPlayerFragment == null) {
             srgMediaPlayer = new SRGMediaPlayerController(this, dataProvider, PLAYER_TAG);
             srgMediaPlayer.setDebugMode(true);
+
+            srgMediaPlayer.setPlayerDelegateFactory(new PlayerDelegateFactory() {
+                @Override
+                public PlayerDelegate getDelegateForMediaIdentifier(PlayerDelegate.OnPlayerDelegateListener srgMediaPlayer, String mediaIdentifier) {
+                    switch (dataProvider.getPrefix(mediaIdentifier)) {
+                        case "aac":
+                            return new ExoPlayerDelegate(DemoMediaPlayerActivity.this,srgMediaPlayer, ExoPlayerDelegate.SourceType.EXTRACTOR);
+                        case "il":
+                        case "native":
+                            return new NativePlayerDelegate(srgMediaPlayer);
+                    }
+                    return new NativePlayerDelegate(srgMediaPlayer);
+                }
+            });
 
             mediaPlayerFragment = new MediaPlayerFragment();
             mediaPlayerFragment.mediaPlayer = srgMediaPlayer;
