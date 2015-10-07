@@ -32,5 +32,3 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'
 }
-
-apply from: '../utilities.gradle'

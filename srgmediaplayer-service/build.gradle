@@ -24,5 +24,3 @@ dependencies {
     compile project(':srgmediaplayer')
     compile project(':srgmediaplayer-extras')
 }
-
-apply from: '../utilities.gradle'

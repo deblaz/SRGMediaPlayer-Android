@@ -26,5 +26,3 @@ dependencies {
     compile project(':srgmediaplayer')
     compile 'com.github.bumptech.glide:glide:3.6.1'
 }
-
-apply from: '../utilities.gradle'
