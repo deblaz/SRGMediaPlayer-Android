@@ -19,15 +19,6 @@ android {
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
 
-	signingConfigs {
-		release {
-			storeFile file(property("ch.srg.srgplayer.rts.keystore"))
-			storePassword property("ch.srg.srgplayer.rts.password")
-			keyAlias property("ch.srg.srgplayer.rts.alias")
-			keyPassword property("ch.srg.srgplayer.rts.password")
-		}
-	}
-
 	buildTypes {
 		release {
 			minifyEnabled false
@@ -104,5 +95,3 @@ def gitLastCommit() {
 		return 'git log -1 --no-merges --pretty=oneline --abbrev-commit'.execute().text.trim() + "\n" + "git status -s".execute().text.trim()
 	}
 }
-
-apply from: '../utilities.gradle'
