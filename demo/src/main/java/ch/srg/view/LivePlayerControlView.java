@@ -84,9 +84,9 @@ public class LivePlayerControlView extends RelativeLayout implements View.OnClic
     public void onClick(View v) {
         if (playerController != null) {
             if (v == playButton) {
-                if (playerController.getMediaPosition() < playerController.getMediaPlaylistStartTime()) {
-                    playerController.seekTo(1);
-                }
+//                if (playerController.getMediaPosition() < playerController.getMediaPlaylistStartTime()) {
+//                    playerController.seekTo(1);
+//                }
                 playerController.start();
             } else if (v == pauseButton) {
                 playerController.pause();
